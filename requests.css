@@ -1,50 +1,79 @@
+header {	
+	text-align:center; 
+	background-color:#114269;
+	color:#DDDDDD;
+	}
+
 div {	
 	text-align:center; 
 	background-color:#013259;
-	color:#FFFFFF;
+	color:#DDDDDD;
 	}
 
 table {
 	background-color:#013259;
-	color:#FFFFFF;
+	color:#DDDDDD;
 	position:left;
   }
 
 	
 #getset {
-	color: #FFF;
-	float:left;
+	color: #DDD;
+	float:right;
+        padding-top: 20px;
+        padding-left: 30px;
+        padding-bottom: 20px;
 }
 
 #right {
-	color: #FFF;
+	color: #DDD;
+        padding-top: 20px;
+        padding-right: 30px;
+        padding-bottom: 20px;
 }
 	
 #action {
 	color: #FFF;
-	float:right;
-	padding-right:70;
+	float:left;
+        padding-top: 20px;
+        padding-right: 30px;
+        padding-bottom: 20px;
+
 }
 
 #stream {
-	color: #FFF;
-	float:right;
+	float:left;
+        padding-top: 20px;
 	padding-right:80;
+        padding-bottom: 20px;
+
 }
 #getsettings {
-	color: #FFF;
 }	
 
 #setsettings {
-	color: #FFF;
 }
 
-#Focus {
-	float:right;
+#focus {
+	float:left;
+        padding-top: 20px;
+        padding-right: 30px;
+        padding-bottom: 20px;
+}
+
+#capture {
+	float:left;
+        padding-top: 20px;
+        padding-right: 30px;
+        padding-bottom: 20px;
+
 }
 
 #zoom {
-	float:right;
+	float:left;
+        padding-top: 20px;
+        padding-right: 30px;
+        padding-bottom: 20px;
 }
 
 #clicker1 {
@@ -53,6 +82,8 @@ table {
     height: 50px;
     margin-left: 20px;
     margin-right: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;   
     background: white;
     color: #000;
     font-size: 10px;
@@ -66,6 +97,8 @@ table {
     height: 50px;
     margin-left: 20px;
     margin-right: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;   
     background: white;
     color: #000;
     font-size: 10px;
@@ -78,6 +111,8 @@ table {
     height: 50px;
     margin-left: 20px;
     margin-right: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;   
     background: white;
     color: #000;
     font-size: 10px;
@@ -91,6 +126,8 @@ table {
     height: 50px;
     margin-left: 20px;
     margin-right: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;   
     background: white;
     color: #000;
     font-size: 10px;
@@ -103,6 +140,8 @@ table {
     width: 50px;
     height: 50px;
     margin:20px;
+    border: 1px solid gray;
+    border-radius: 5px;   
     background: white;
     color: #000;
     font-size: 10px;
@@ -115,7 +154,8 @@ table {
     width: 50px;
     height: 50px;
     margin: 20px;
-    
+    border: 1px solid gray;
+    border-radius: 5px;       
     background: white;
     color: #000;
     font-size: 10px;
@@ -127,7 +167,8 @@ table {
     width: 50px;
     height: 50px;
     margin: 20px;
-    
+    border: 1px solid gray;
+    border-radius: 5px;    
     background: white;
     color: #000;
     font-size: 10px;
@@ -140,6 +181,8 @@ table {
     width: 50px;
     height: 50px;
     margin: 20px;
+    border: 1px solid gray;
+    border-radius: 5px;
     
     background: white;
     color: #000;
@@ -152,15 +195,20 @@ table {
     width: 50px;
     height: 50px;
     margin-left: 160px;
-    
+    border: 2px solid gray;
+    border-radius: 5px;
     background: white;
     color: #000;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     font-family: Arial, sans-serif;
 }
 #time_settings {
     clear: both;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+
 }
 #results {
     clear: both;

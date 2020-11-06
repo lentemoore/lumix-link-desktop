@@ -1,4 +1,6 @@
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="requests.css">
 <SCRIPT language="javascript" src="jquery.js"></SCRIPT>
 <script>
@@ -23,7 +25,7 @@
 </head>
 
 <body bgcolor="#013259" onload="onload()">
-<div id="header">
+<header>
 <script>
     window.cameraIp = null;
 
@@ -44,10 +46,13 @@
         window.cameraIp = prompt("Enter the IP address of the camera");    
     }
 </script>
-<b>Panasonic Lumix Web Remote Control</b>
-</div>
+<h1>Panasonic Lumix</h1>
+<h3>Web Remote Control</h3>
+</header>
 
-<div id="getset">
+<section>
+<div id="getset" class="w3-third">
+<h3>General Settings</h3>
 <div id="getsettings">
 <b>Get...</b>
 <br>
@@ -441,22 +446,304 @@
 </FORM>
 </TABLE>
 </div>
+
+<div id="time_settings">
+<script type="text/javascript">
+    if (!String.prototype.repeat) {
+  String.prototype.repeat = function(count) {
+    'use strict';
+    if (this == null) {
+      throw new TypeError('can\'t convert ' + this + ' to object');
+    }
+    var str = '' + this;
+    count = +count;
+    if (count != count) {
+      count = 0;
+    }
+    if (count < 0) {
+      throw new RangeError('repeat count must be non-negative');
+    }
+    if (count == Infinity) {
+      throw new RangeError('repeat count must be less than infinity');
+    }
+    count = Math.floor(count);
+    if (str.length == 0 || count == 0) {
+      return '';
+    }
+    // Ensuring count is a 31-bit integer allows us to heavily optimize the
+    // main part. But anyway, most current (August 2014) browsers can't handle
+    // strings 1 << 28 chars or longer, so:
+    if (str.length * count >= 1 << 28) {
+      throw new RangeError('repeat count must not overflow maximum string size');
+    }
+    var maxCount = str.length * count;
+    count = Math.floor(Math.log(count) / Math.log(2));
+    while (count) {
+       str += str;
+       count--;
+    }
+    str += str.substring(0, maxCount - str.length);
+    return str;
+  }
+    }
+
+    if (!String.prototype.padStart) {
+    String.prototype.padStart = function padStart(targetLength,padString) {
+        targetLength = targetLength>>0; //truncate if number or convert non-number to 0;
+        padString = String((typeof padString !== 'undefined' ? padString : ' '));
+        if (this.length > targetLength) {
+            return String(this);
+        }
+        else {
+            targetLength = targetLength-this.length;
+            if (targetLength > padString.length) {
+                padString += padString.repeat(targetLength/padString.length); //append to original to ensure we are longer than needed
+            }
+            return padString.slice(0,targetLength) + String(this);
+        }
+    };
+
+      Date.prototype.stdTimezoneOffset = function() {
+        var fy=this.getFullYear();
+        if (!Date.prototype.stdTimezoneOffset.cache.hasOwnProperty(fy)) {
+
+            var maxOffset = new Date(fy, 0, 1).getTimezoneOffset();
+            var monthsTestOrder=[6,7,5,8,4,9,3,10,2,11,1];
+
+            for(var mi=0;mi<12;mi++) {
+                var offset=new Date(fy, monthsTestOrder[mi], 1).getTimezoneOffset();
+                if (offset!=maxOffset) { 
+                    maxOffset=Math.max(maxOffset,offset);
+                    break;
+                }
+            }
+            Date.prototype.stdTimezoneOffset.cache[fy]=maxOffset;
+        }
+        return Date.prototype.stdTimezoneOffset.cache[fy];
+    };
+
+    Date.prototype.stdTimezoneOffset.cache={};
+
+    Date.prototype.isDST = function() {
+        return this.getTimezoneOffset() < this.stdTimezoneOffset(); 
+    };
+}
+</script>
+<br>
+<b>Time Settings</b>
+<br>
+<table>
+<TR>
+<TD><input leftmargin="100" type="button" name="init" value="Sync camera time with computer" onclick="d=new Date(); sign = (d.getTimezoneOffset() > 0 ? '-' : '+'); off = (d.isDST ? d.stdTimezoneOffset() : d.getTimezoneOffset()); offset = Math.round(Math.abs(off / 60 * 100)).toString().padStart(4, '0'); date = '' + d.getUTCFullYear() + (d.getUTCMonth()+1).toString().padStart(2, '0') + d.getDate().toString().padStart(2, '0') + d.getUTCHours().toString().padStart(2, '0') + d.getUTCMinutes().toString().padStart(2, '0') + d.getUTCSeconds().toString().padStart(2, '0') + sign + offset; window.open('http://' + window.cameraIp + '/cam.cgi?mode=setsetting&type=clock&value=' + date, 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"> 
+</TD></TR>
+<tr><td><form method="get" action="http://192.168.0.1/cam.cgi" target="results"><input type="text" name="value" width="35" placeholder="20190420125500+0100" /><input type="hidden" name="mode" value="setsetting" /><input type="hidden" name="type" value="clock" /><input type="submit" value="Set time" /></form></td></tr>
+</table>
+<br>
 </div>
-<div id="right">
+
+</div>
+
+<div id="right" class="w3-row-padding w3-twothird">
+
+<h3>Controls</h3>
+
 <div id="Action">
 <b>Action</b>
 <br>
 <table>
 <TR>
-<TD><input leftmargin="100" type="button" name="init" value="recmode" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=recmode', 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"onclick> 
-</TD><TD><input leftmargin="100" type="button" name="init" value="playmode" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=playmode', 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"onclick> 
-</TD><TD><input leftmargin="100" type="button" name="init" value="recordstart" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=video_recstart', 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"onclick> 
-</TD><TD><input leftmargin="100" type="button" name="init" value="recordstop" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=video_recstop', 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"onclick> 
+<TD><input leftmargin="100" type="button" name="init" value="recmode" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=recmode', 'results')" style="background-color:#AAAAAA" style="color:white; font-weight:bold"onclick> 
+</TD><TD><input leftmargin="100" type="button" name="init" value="playmode" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=playmode', 'results')" style="background-color:#AAAAAA" style="color:white; font-weight:bold"onclick> 
+</TD><TD><input leftmargin="100" type="button" name="init" value="recordstart" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=video_recstart', 'results')" style="background-color:#AAAAAA" style="color:white; font-weight:bold"onclick> 
+</TD><TD><input leftmargin="100" type="button" name="init" value="recordstop" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=video_recstop', 'results')" style="background-color:#AAAAAA" style="color:white; font-weight:bold"onclick> 
 </TD></TR>
 </table>
 <br>
 </div>
-<div id="Focus">
+
+
+
+<div id="capture">
+<br>
+<b>Take a Picture</b><br>(press and hold for continous shooting)<br><br>
+<div id="cclicker"><br>Take a<br>picture
+	<script>
+	var cclicker = $('#cclicker');
+	var mousedoc = false;
+	cclicker.mousedown(function(){
+		this.style.background='grey';
+        window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=capture', 'results');
+		mousedoc = true;
+		return false;
+	});
+
+	cclicker.mouseup(function(){
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=capture_cancel', 'results');
+	this.style.background='white';
+	mousedoc = false;
+    return false;
+	});
+
+	cclicker.mouseout(function(){
+	if (mousedoc == true) {
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=capture_cancel', 'results');
+	this.style.background='white';
+	}
+    return false;
+	});
+	</script>
+</div>
+</div>
+
+<div id="zoom">
+<br>
+<b>Zoom</b><br>(press and hold)<br>
+
+    <div id="zclicker1"><br>WIDE<br>FAST
+    <script>
+	var zclicker1 = $('#zclicker1');
+	var mousedoz1 = false;
+	zclicker1.mousedown(function(){
+		this.style.background='grey';
+        window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=wide-fast', 'results');
+		mousedoz1 = true;
+		return false;
+	});
+
+	zclicker1.mouseup(function(){
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
+	this.style.background='white';
+	mousedoz1 = false;
+    return false;
+	});
+
+	zclicker1.mouseout(function(){
+	if (mousedoz1 == true) {
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
+	this.style.background='white';
+	}
+    return false;
+	});
+    </script>
+    </div>
+    
+    <div id="zclicker2"><br>WIDE<br>SLOW
+    <script>
+	var zclicker2 = $('#zclicker2');
+	var mousedoz2 = false;
+	zclicker2.mousedown(function(){
+		this.style.background='grey';
+        window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=wide-normal', 'results');
+		mousedoz2 = true;
+		return false;
+	});
+
+	zclicker2.mouseup(function(){
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
+	this.style.background='white';
+	mousedoz2 = false;
+    return false;
+	});
+	
+	zclicker2.mouseout(function(){
+	if (mousedoz2 == true) {
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
+	this.style.background='white';
+	}
+    return false;
+	});
+    </script>
+    </div>
+    
+    <div id="zclicker3"><br>TELE<br>SLOW
+    <script>
+	var ztimeout3, zclicker3 = $('#zclicker3');
+	var mousedoz3 = false;
+	zclicker3.mousedown(function(){
+    window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=tele-normal', 'results');
+	this.style.background='grey';
+	mousedoz3 = true;
+	return false;
+	});
+
+	zclicker3.mouseup(function(){
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
+	this.style.background='white';
+	mousedoz3 = false;
+    return false;
+	});
+
+	zclicker3.mouseout(function(){
+	if (mousedoz3 == true) {
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
+	this.style.background='white';
+	}
+    return false;
+	});
+    </script>
+    </div>
+	
+    <div id="zclicker4"><br>TELE<br>FAST
+    <script>
+	var zclicker4 = $('#zclicker4');
+	var mousedoz4 = false;
+	zclicker4.mousedown(function(){
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=tele-fast', 'results');
+	this.style.background='grey';
+	mousedoz4 = true;
+	return false;
+	});
+
+	zclicker4.mouseup(function(){
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
+	this.style.background='white';
+	mousedoz4 = false;
+    return false;
+	});
+
+	zclicker4.mouseout(function(){
+	if (mousedoz4 == true) {
+	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
+	this.style.background='white';
+	}
+    return false;
+	});
+    </script>
+    </div>
+</div>
+
+
+
+
+<script>
+	function startStream()
+	{
+		window.open('http://' + window.cameraIp + '/cam.cgi?mode=startstream&value=49199', 'results');
+		streamtimer = setInterval( function(){ 
+			window.open('http://' + window.cameraIp + '/cam.cgi?mode=startstream&value=49199', 'results');
+		}, 10000 );
+	}
+	
+	function stopStream()
+	{
+		clearInterval( streamtimer );
+		window.open( 'http://' + window.cameraIp + '/cam.cgi?mode=stopstream', 'results' );
+	}
+</script>
+<div id="Stream">
+<br>
+<b>Stream</b>
+<br>
+<table>
+<TR>
+<TD><input leftmargin="100" type="button" name="init" value="StartStream" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=startstream&value=49199', 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"onclick> 
+</TD><TD><input leftmargin="100" type="button" name="init" value="StopStream" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=stopstream', 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"onclick> 
+</TD></TR>
+</table>
+<br>
+</div>
+
+<div id="focus">
 <b>Manual Focus</b><br>(press and hold)<br>
 <br>
 <div id="focusint">
@@ -579,273 +866,8 @@ intervals (in ms) between 2 succesive <br>focus actions (avoid value smaller tha
 	</div>
 <br>
 </div>
-<div id="Zoom">
-<br>
-<b>Zoom</b><br>(press and hold)<br>
-<div id="zclicker1"><br>WIDE<br>FAST
-	<script>
-	var zclicker1 = $('#zclicker1');
-	var mousedoz1 = false;
-	zclicker1.mousedown(function(){
-		this.style.background='grey';
-        window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=wide-fast', 'results');
-		mousedoz1 = true;
-		return false;
-	});
-
-	zclicker1.mouseup(function(){
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
-	this.style.background='white';
-	mousedoz1 = false;
-    return false;
-	});
-
-	zclicker1.mouseout(function(){
-	if (mousedoz1 == true) {
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
-	this.style.background='white';
-	}
-    return false;
-	});
-	</script>
-	</div>
-	<div id="zclicker2"><br>WIDE<br>SLOW
-	<script>
-	var zclicker2 = $('#zclicker2');
-	var mousedoz2 = false;
-	zclicker2.mousedown(function(){
-		this.style.background='grey';
-        window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=wide-normal', 'results');
-		mousedoz2 = true;
-		return false;
-	});
-
-	zclicker2.mouseup(function(){
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
-	this.style.background='white';
-	mousedoz2 = false;
-    return false;
-	});
-	
-	zclicker2.mouseout(function(){
-	if (mousedoz2 == true) {
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
-	this.style.background='white';
-	}
-    return false;
-	});
 
 
-	</script>
-	</div>
-	<div id="zclicker3"><br>TELE<br>SLOW</div>
-	
-		<script>
-	var ztimeout3, zclicker3 = $('#zclicker3');
-	var mousedoz3 = false;
-	zclicker3.mousedown(function(){
-    window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=tele-normal', 'results');
-	this.style.background='grey';
-	mousedoz3 = true;
-	return false;
-	});
-
-	zclicker3.mouseup(function(){
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
-	this.style.background='white';
-	mousedoz3 = false;
-    return false;
-	});
-
-	zclicker3.mouseout(function(){
-	if (mousedoz3 == true) {
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
-	this.style.background='white';
-	}
-    return false;
-	});
-
-	</script>
-	
-	<div id="zclicker4"><br>TELE<br>FAST
-	
-		<script>
-	var zclicker4 = $('#zclicker4');
-	var mousedoz4 = false;
-	zclicker4.mousedown(function(){
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=tele-fast', 'results');
-	this.style.background='grey';
-	mousedoz4 = true;
-	return false;
-	});
-
-	zclicker4.mouseup(function(){
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
-	this.style.background='white';
-	mousedoz4 = false;
-    return false;
-	});
-
-	zclicker4.mouseout(function(){
-	if (mousedoz4 == true) {
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=zoomstop', 'results');
-	this.style.background='white';
-	}
-    return false;
-	});
-
-	</script>
-</div>
-<div capture>
-<br>
-<b>(Continuous) Shooting</b><br>(press and hold)<br><br>
-<div id="cclicker">SHOOT<br>SHOOT<br>SHOOT<br>...
-	<script>
-	var cclicker = $('#cclicker');
-	var mousedoc = false;
-	cclicker.mousedown(function(){
-		this.style.background='grey';
-        window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=capture', 'results');
-		mousedoc = true;
-		return false;
-	});
-
-	cclicker.mouseup(function(){
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=capture_cancel', 'results');
-	this.style.background='white';
-	mousedoc = false;
-    return false;
-	});
-
-	cclicker.mouseout(function(){
-	if (mousedoc == true) {
-	window.open('http://' + window.cameraIp + '/cam.cgi?mode=camcmd&value=capture_cancel', 'results');
-	this.style.background='white';
-	}
-    return false;
-	});
-	</script>
-</div>
-<script>
-	function startStream()
-	{
-		window.open('http://' + window.cameraIp + '/cam.cgi?mode=startstream&value=49199', 'results');
-		streamtimer = setInterval( function(){ 
-			window.open('http://' + window.cameraIp + '/cam.cgi?mode=startstream&value=49199', 'results');
-		}, 10000 );
-	}
-	
-	function stopStream()
-	{
-		clearInterval( streamtimer );
-		window.open( 'http://' + window.cameraIp + '/cam.cgi?mode=stopstream', 'results' );
-	}
-</script>
-<div id="Stream">
-<br>
-<b>Stream</b>
-<br>
-<table>
-<TR>
-<TD><input leftmargin="100" type="button" name="init" value="StartStream" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=startstream&value=49199', 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"onclick> 
-</TD><TD><input leftmargin="100" type="button" name="init" value="StopStream" onclick="window.open('http://' + window.cameraIp + '/cam.cgi?mode=stopstream', 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"onclick> 
-</TD></TR>
-</table>
-<br>
-</div>
-<div id="time_settings">
-<script type="text/javascript">
-    if (!String.prototype.repeat) {
-  String.prototype.repeat = function(count) {
-    'use strict';
-    if (this == null) {
-      throw new TypeError('can\'t convert ' + this + ' to object');
-    }
-    var str = '' + this;
-    count = +count;
-    if (count != count) {
-      count = 0;
-    }
-    if (count < 0) {
-      throw new RangeError('repeat count must be non-negative');
-    }
-    if (count == Infinity) {
-      throw new RangeError('repeat count must be less than infinity');
-    }
-    count = Math.floor(count);
-    if (str.length == 0 || count == 0) {
-      return '';
-    }
-    // Ensuring count is a 31-bit integer allows us to heavily optimize the
-    // main part. But anyway, most current (August 2014) browsers can't handle
-    // strings 1 << 28 chars or longer, so:
-    if (str.length * count >= 1 << 28) {
-      throw new RangeError('repeat count must not overflow maximum string size');
-    }
-    var maxCount = str.length * count;
-    count = Math.floor(Math.log(count) / Math.log(2));
-    while (count) {
-       str += str;
-       count--;
-    }
-    str += str.substring(0, maxCount - str.length);
-    return str;
-  }
-    }
-
-    if (!String.prototype.padStart) {
-    String.prototype.padStart = function padStart(targetLength,padString) {
-        targetLength = targetLength>>0; //truncate if number or convert non-number to 0;
-        padString = String((typeof padString !== 'undefined' ? padString : ' '));
-        if (this.length > targetLength) {
-            return String(this);
-        }
-        else {
-            targetLength = targetLength-this.length;
-            if (targetLength > padString.length) {
-                padString += padString.repeat(targetLength/padString.length); //append to original to ensure we are longer than needed
-            }
-            return padString.slice(0,targetLength) + String(this);
-        }
-    };
-
-      Date.prototype.stdTimezoneOffset = function() {
-        var fy=this.getFullYear();
-        if (!Date.prototype.stdTimezoneOffset.cache.hasOwnProperty(fy)) {
-
-            var maxOffset = new Date(fy, 0, 1).getTimezoneOffset();
-            var monthsTestOrder=[6,7,5,8,4,9,3,10,2,11,1];
-
-            for(var mi=0;mi<12;mi++) {
-                var offset=new Date(fy, monthsTestOrder[mi], 1).getTimezoneOffset();
-                if (offset!=maxOffset) { 
-                    maxOffset=Math.max(maxOffset,offset);
-                    break;
-                }
-            }
-            Date.prototype.stdTimezoneOffset.cache[fy]=maxOffset;
-        }
-        return Date.prototype.stdTimezoneOffset.cache[fy];
-    };
-
-    Date.prototype.stdTimezoneOffset.cache={};
-
-    Date.prototype.isDST = function() {
-        return this.getTimezoneOffset() < this.stdTimezoneOffset(); 
-    };
-}
-</script>
-<br>
-<b>Time Settings</b>
-<br>
-<table>
-<TR>
-<TD><input leftmargin="100" type="button" name="init" value="Sync camera time with computer" onclick="d=new Date(); sign = (d.getTimezoneOffset() > 0 ? '-' : '+'); off = (d.isDST ? d.stdTimezoneOffset() : d.getTimezoneOffset()); offset = Math.round(Math.abs(off / 60 * 100)).toString().padStart(4, '0'); date = '' + d.getUTCFullYear() + (d.getUTCMonth()+1).toString().padStart(2, '0') + d.getDate().toString().padStart(2, '0') + d.getUTCHours().toString().padStart(2, '0') + d.getUTCMinutes().toString().padStart(2, '0') + d.getUTCSeconds().toString().padStart(2, '0') + sign + offset; window.open('http://' + window.cameraIp + '/cam.cgi?mode=setsetting&type=clock&value=' + date, 'results')" style="background-color:#FFFFFF" style="color:white; font-weight:bold"> 
-</TD></TR>
-<tr><td><form method="get" action="http://192.168.0.1/cam.cgi" target="results"><input type="text" name="value" width="35" placeholder="20190420125500+0100" /><input type="hidden" name="mode" value="setsetting" /><input type="hidden" name="type" value="clock" /><input type="submit" value="Set time" /></form></td></tr>
-</table>
-<br>
-</div>
 </div>
 </div>
 </div>
@@ -853,6 +875,7 @@ intervals (in ms) between 2 succesive <br>focus actions (avoid value smaller tha
     <IFRAME SRC="results.html" name="results"></IFRAME>
     <IFRAME SRC="hidden.html" name="hidden" style="display:none"></IFRAME>
 </div>
+</section>
 
 </body>
 </html>
