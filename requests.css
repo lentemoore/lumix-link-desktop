@@ -6,78 +6,83 @@ header {
 
 div {	
 	text-align:center; 
-	background-color:#013259;
 	color:#DDDDDD;
 	}
 
 table {
-	background-color:#013259;
 	color:#DDDDDD;
 	position:left;
-  }
+        margin: 0 auto;
+}
+  
+#table_id {
+  display: block;
+}
+
+#table_id td {
+  display: inline-block;
+}
 
 	
 #getset {
+        background-color:#012754;
 	color: #DDD;
-	float:right;
-        padding-top: 20px;
-        padding-left: 30px;
-        padding-bottom: 20px;
+	float:left;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-bottom: 10px;
 }
 
-#right {
+#controls {
+	float:left;
 	color: #DDD;
-        padding-top: 20px;
-        padding-right: 30px;
-        padding-bottom: 20px;
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+        padding-bottom: 10px;
 }
 	
-#action {
-	color: #FFF;
-	float:left;
-        padding-top: 20px;
-        padding-right: 30px;
-        padding-bottom: 20px;
-
-}
-
-#stream {
-	float:left;
-        padding-top: 20px;
-	padding-right:80;
-        padding-bottom: 20px;
-
-}
 #getsettings {
 }	
 
 #setsettings {
 }
 
+#shoot{
+    	float:left;
+	color: #DDD;
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+}
+
+#action{
+    	float:left;
+	color: #DDD;
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+}
+
 #focus {
-	float:left;
-        padding-top: 20px;
-        padding-right: 30px;
-        padding-bottom: 20px;
+	float:right;
+	color: #DDD;
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
 }
 
-#capture {
-	float:left;
-        padding-top: 20px;
-        padding-right: 30px;
-        padding-bottom: 20px;
-
-}
 
 #zoom {
-	float:left;
-        padding-top: 20px;
-        padding-right: 30px;
-        padding-bottom: 20px;
+	float:right;
+	color: #DDD;
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
 }
 
 #clicker1 {
-	float:left;
+    float:left;
     width: 50px;
     height: 50px;
     margin-left: 20px;
@@ -92,7 +97,7 @@ table {
 }
 
 #clicker2 {
-	float:left;
+    float:left;
     width: 50px;
     height: 50px;
     margin-left: 20px;
@@ -106,7 +111,7 @@ table {
     font-family: Arial, sans-serif;
 }
 #clicker3 {
-	float:left;
+    float:left;
     width: 50px;
     height: 50px;
     margin-left: 20px;
@@ -121,7 +126,7 @@ table {
 }
 
 #clicker4 {
-	float:left;
+    float:left;
     width: 50px;
     height: 50px;
     margin-left: 20px;
@@ -136,7 +141,7 @@ table {
 }
 
 #zclicker1 {
-	float:left;
+    float:left;
     width: 50px;
     height: 50px;
     margin:20px;
@@ -150,7 +155,7 @@ table {
 }
 
 #zclicker2 {
-	float:left;
+    float:left;
     width: 50px;
     height: 50px;
     margin: 20px;
@@ -163,7 +168,7 @@ table {
     font-family: Arial, sans-serif;
 }
 #zclicker3 {
-	float:left;
+    float:left;
     width: 50px;
     height: 50px;
     margin: 20px;
@@ -177,7 +182,7 @@ table {
 }
 
 #zclicker4 {
-	float:left;
+    float:left;
     width: 50px;
     height: 50px;
     margin: 20px;
@@ -191,7 +196,7 @@ table {
     font-family: Arial, sans-serif;
 }
 #cclicker {
-	float:center;
+    float:center;
     width: 50px;
     height: 50px;
     margin-left: 160px;
@@ -204,10 +209,10 @@ table {
     font-family: Arial, sans-serif;
 }
 #time_settings {
-    clear: both;
-    padding-top: 50px;
-    padding-right: 30px;
-    padding-bottom: 50px;
+    float:right;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
 
 }
 #results {
